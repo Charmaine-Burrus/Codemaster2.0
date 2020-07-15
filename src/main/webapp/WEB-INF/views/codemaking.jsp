@@ -22,7 +22,7 @@
   	  <a class="btn btn-primary btn-sm" href="learnMore.jsp" role="button" style="background-color: #ab6d20;">Learn more</a>
   	</h3>
   	
-	<form action="CodemakingServlet" method="post">
+	<form action="codemaking" method="post">
 	  
 	  <div class="form-group"> Type of Cipher 
         <select class="form-control" name="typeOfCipher" id="typeOfCipher">
@@ -43,12 +43,12 @@
   <div class="container">
   	Key:
   	 <c:forEach var="key" items="${keyArray}"> 
-      	<c:out value=" ${key}"/>
+      	<c:out value="${key}"/>
      </c:forEach>
   </div>
   
   <div class="container">
-	Encrypted Message: <c:out value="${encryptedMessage}"/>
+	Encrypted Message: ${encryptedMessage}
   </div>
   
  

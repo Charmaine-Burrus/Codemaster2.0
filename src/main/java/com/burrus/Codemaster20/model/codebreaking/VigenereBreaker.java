@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 import com.burrus.Codemaster20.model.codemaking.VigenereCipher;
 
@@ -51,7 +52,23 @@ public class VigenereBreaker {
         return key;
     }
 	
-	public HashSet<String> readDictionary(File file) {
+	// get file from classpath, resources folder
+    private File getFileFromResources(String fileName) {
+
+        ClassLoader classLoader = getClass().getClassLoader();
+
+        URL resource = classLoader.getResource(fileName);
+        if (resource == null) {
+            throw new IllegalArgumentException("file is not found!");
+        } else {
+            return new File(resource.getFile());
+        }
+
+    }
+	
+	public HashSet<String> readDictionary(String language) {
+		File file = getFileFromResources("dictionaries/" + language+".txt");
+
         HashSet<String> dictionary = new HashSet<String>();
         //try with resources
         try(BufferedReader dictionaryBR = new BufferedReader(new FileReader(file))){
@@ -74,7 +91,7 @@ public class VigenereBreaker {
         HashMap<String, HashSet<String>> languageToDictionary = new HashMap<String, HashSet<String>>();
         
         for (String language : languages) {
-            HashSet<String> dictionaryHS = readDictionary(new File(VigenereBreaker.class.getResource("dictionaries/" + language+".txt").getPath()));
+            HashSet<String> dictionaryHS = readDictionary(language);
             languageToDictionary.put(language, dictionaryHS);
         }
         return languageToDictionary;
@@ -107,7 +124,7 @@ public class VigenereBreaker {
             String possibleDecrypedMessage = vc.decryptMessage(encryptedMessage);
             System.out.println("just made a possibleDecrypedMessage=" + possibleDecrypedMessage);
             //ClassPathResource resource = new ClassPathResource("com/thesis/work/raw_sentences.txt");
-            int realWords = getNumberRealWords(possibleDecrypedMessage, readDictionary((new File(language+".txt"))));
+            int realWords = getNumberRealWords(possibleDecrypedMessage, readDictionary(language));
             System.out.println("realWords=" + realWords);
             if (realWords > mostRealWords) {
                 mostRealWords = realWords;

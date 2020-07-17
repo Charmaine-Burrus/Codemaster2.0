@@ -1,0 +1,38 @@
+/* body {
+	used on index page
+  background-color:  #1f6933;
+  color: lightgreen;
+  font: 20px Georgia;
+  max-width: 750px;
+  margin: auto;
+} */
+
+.green-background {
+	background-color: #1f6933;
+/* tan - #e6e0da;  light green - #97c9a2;  dark brown - #998874;	 */
+}
+
+.tan-background {
+	background-color: #dbc5ad;
+}
+
+.light-green-background {
+	background-color: #97c9a2;
+}
+
+.ivory-background {
+	background-color: #e9ecef;
+}
+
+.brown-background {
+	background-color: #ab6d20;
+}
+
+.green-button {
+	background-color: #1f6933;
+}
+
+.padding {
+	padding-bottom: 1rem;
+	padding-top: 1rem;
+}

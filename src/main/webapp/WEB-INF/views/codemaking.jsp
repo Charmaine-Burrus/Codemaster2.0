@@ -9,23 +9,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <title>Codemaster</title>
+  <link href="./static/custom.css" rel="stylesheet">
+  <title>Encrypting</title>
 </head>
 
-<body>
+<body class="green-background">
   <jsp:include page="components/header.jsp"/>
   
-  <div class="container">
-  	<h1>Time to enrypt your message.</h1>
-  	<p></p>
+  <div class="jumbotron">
+  	<h1 class="display-4">Time to enrypt your message.</h1>
+  	<hr class="my-4">
   	<h4>Choose a type of Cipher and type your message. 
-  	  <a class="btn btn-primary btn-sm" href="learnMore.jsp" role="button" style="background-color: #ab6d20;">Learn more</a>
-  	</h3>
+  	  <a class="btn btn-primary btn-sm brown-background" href="learnMore" role="button">Learn more</a>
+  	</h4>
   	
 	<form action="codemaking" method="post">
 	  
 	  <div class="form-group"> Type of Cipher 
-        <select class="form-control" name="typeOfCipher" id="typeOfCipher">
+        <select class="form-control" name="typeOfCipher" id="typeOfCipher" required>
         <option value="CaesarCipher">Caesar Cipher</option>
         <option value="VigenereCipher">Vigenere Cipher</option>
         </select>
@@ -33,23 +34,34 @@
       
       <div class="form-group">
         <label for="message">Message</label>
-        <input type="text" class="form-control" name="message" id="message" placeholder="Type your message here...">
+        <input type="text" class="form-control" name="message" id="message" placeholder="Type your message here..." required>
       </div>
-      <button type="submit" class="btn btn-primary btn-sm" style="background-color: #1f6933;">Encrypt</button>
+      <button type="submit" class="btn btn-primary btn-sm green-background">Encrypt</button>
     </form>
     
   </div>
   
-  <div class="container">
-  	Key:
-  	 <c:forEach var="key" items="${keyArray}"> 
-      	<c:out value="${key}"/>
-     </c:forEach>
-  </div>
-  
-  <div class="container">
-	Encrypted Message: ${encryptedMessage}
-  </div>
+  <c:if test="${not empty encryptedMessage}">
+	  <div class="jumbotron tan-background">
+	  	  <h4>Results</h4>
+	  	  <hr class="my-4">
+		  <c:if test="${empty keyString}">
+		  	<div class="container">
+		  		<b>Key:</b> ${keyArray[0]}
+		  	</div>
+		  </c:if>
+		  
+		  <c:if test="${not empty keyString}">
+		  	<div class="container">
+		  		<b>Key:</b> ${keyString}
+		  	</div>
+		  </c:if>
+		  
+		  <div class="container">
+			<b>Encrypted Message:</b> ${encryptedMessage}
+		  </div>
+	  </div>
+  </c:if>
   
  
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

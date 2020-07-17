@@ -8,10 +8,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link href="./static/custom.css" rel="stylesheet">
   <title>Codemaster</title>
 </head>
 
-<body>
+<body class="green-background">
   <jsp:include page="components/header.jsp"/>
   
   <div class="jumbotron">
@@ -19,11 +20,11 @@
     <p class="lead">You've made it to the lair. Here you can encrypt or decrypt your most secret messages.</p>
     <hr class="my-4">
     <p>Codes and ciphers have been used for thousands of years to allow private communication between people.</p>
-    <a class="btn btn-primary btn-lg" href="learnMore" role="button" style="background-color:  #ab6d20;">Learn more</a>
+    <a class="btn btn-primary btn-md brown-background" href="learnMore" role="button">Learn more</a>
     <p></p>
     <p>Codemaster allows you to use both Caesar and Vigenère ciphers to encrypt and decrypt your messages.</p>
-    <a class="btn btn-primary btn-lg" href="codemaking" role="button" style="background-color:  #1f6933;">Encrypt a Message</a>
-    <a class="btn btn-primary btn-lg" href="codebreaking" role="button" style="background-color:  #1f6933;">Decrypt a Message</a>
+    <a class="btn btn-primary btn-md green-background" href="codemaking" role="button">Encrypt a Message</a>
+    <a class="btn btn-primary btn-md green-background" href="codebreaking" role="button">Decrypt a Message</a>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

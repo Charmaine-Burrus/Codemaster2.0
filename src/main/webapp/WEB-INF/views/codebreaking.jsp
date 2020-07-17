@@ -9,41 +9,54 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <title>Codebreaking</title>
+  <link href="./static/custom.css" rel="stylesheet">
+  <title>Decrypting</title>
 </head>
 
-<body>
+<body class="green-background">
   <jsp:include page="components/header.jsp"/>
   
-  <div class="container">
-  	<h1>Let's break this code!</h1>
-  	<p></p>
-  	<h4>Choose a type of Cipher and type the unknown message. Be aware that the codebreaker works best on messages of at least 2 sentences long. Shorter messages may be decrypted inaccurately.
-  	  <a class="btn btn-primary btn-sm" href="learnMore.jsp" role="button" style="background-color: #ab6d20;">Learn more</a>
-  	</h3>
+  <div class="jumbotron">
+  	<h1>Let's decrypt this message!</h1>
+  	<hr class="my-4">
+  	<h4>Choose a type of Cipher and type the unknown message and key. 
+  	  <a class="btn btn-primary btn-sm brown-background" href="learnMore" role="button">Learn more</a>
+  	</h4>
   	
 	<form action="codebreaking" method="post">
 	  
-	  <div class="form-group"> Type of Cipher 
-        <select class="form-control" name="typeOfCipher" id="typeOfCipher">
+	  <div class="form-group">
+		<label for="message">Message</label>
+        <select class="form-control" name="typeOfCipher" id="typeOfCipher" required>
         <option value="CaesarCipher">Caesar Cipher</option>
         <option value="VigenereCipher">Vigenere Cipher</option>
         </select>
       </div>
       
       <div class="form-group">
+        <label for="message">Key</label>
+        <input type="text" class="form-control" name="key" id="key" placeholder="Caesar Cipher ex. 17     Vigenere Cipher ex. TGNA" required> 
+      </div>
+      
+      <div class="form-group">
         <label for="message">Message</label>
         <input type="text" class="form-control" name="message" id="message" placeholder="Type your message here...">
       </div>
-      <button type="submit" class="btn btn-primary btn-sm" style="background-color: #1f6933;">Decrypt</button>
+      
+      <button type="submit" class="btn btn-primary btn-sm green-background">Decrypt</button>
     </form>
     
   </div>
   
-  <div class="container">
-	Decrypted Message: ${decryptedMessage}
-  </div>
-  
+  <c:if test="${not empty decryptedMessage}">
+	  <div class="jumbotron tan-background">
+	  	  <h4>Results</h4>
+	  	  <hr class="my-4">
+		  <div class="container">
+			Decrypted Message: ${decryptedMessage}
+		  </div>
+	  </div>
+  </c:if>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

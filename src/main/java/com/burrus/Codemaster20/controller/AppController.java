@@ -7,9 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.burrus.Codemaster20.model.codebreaking.CaesarBreaker;
-import com.burrus.Codemaster20.model.codebreaking.VigenereBreaker;
 import com.burrus.Codemaster20.model.codemaking.CaesarCipher;
 import com.burrus.Codemaster20.model.codemaking.VigenereCipher;
 
@@ -39,7 +36,7 @@ public class AppController {
 	@PostMapping("codemaking")
 	String codemaking(@RequestParam String typeOfCipher,
 			@RequestParam String message, Model model) {
-		
+
 		StringBuilder encryptedMessage = new StringBuilder();
 		int[] keyArray = new int[1];
 		
@@ -61,6 +58,14 @@ public class AppController {
 			}
 			VigenereCipher vc = new VigenereCipher(keyArray);
 			encryptedMessage.append(vc.encryptMessage(message));
+			
+			//for displaying key to users
+			StringBuilder keyString = new StringBuilder();
+			String alphaString = "-ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			for (int i=0; i<keyArray.length; i++) {
+				keyString.append(alphaString.charAt(keyArray[i]));
+			}
+			model.addAttribute("keyString", keyString.toString());
 			break;	
 		}
 		
@@ -71,21 +76,31 @@ public class AppController {
 	}
 	
 	@PostMapping("codebreaking")
-	String codebreaking(@RequestParam String typeOfCipher,
+	String codebreaking(@RequestParam String typeOfCipher, @RequestParam String key,
 			@RequestParam String message, Model model) {
-		
+		System.out.println("In Post");
 		StringBuilder decryptedMessage = new StringBuilder();
 		
 		switch(typeOfCipher) {
 		
 		case("CaesarCipher"):
-			CaesarBreaker cb = new CaesarBreaker();
-			decryptedMessage.append(cb.decrypt(message));
+			System.out.println("In CC");
+			int intKey = Integer.parseInt(key);
+			CaesarCipher cc = new CaesarCipher(intKey);
+			decryptedMessage.append(cc.decryptMessage(message));
 			break;
 		
 		case("VigenereCipher"):
-			VigenereBreaker vb = new VigenereBreaker();
-			decryptedMessage.append(vb.breakVigenereCipher(message));
+			System.out.println("In VC");
+			int[] keyArray = new int[key.length()];
+			String alphaString = "-ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			key = key.toUpperCase();
+			for (int i=0; i<key.length(); i++) {
+				keyArray[i] = alphaString.indexOf(key.charAt(i));
+			}
+			
+			VigenereCipher vc = new VigenereCipher(keyArray);
+			decryptedMessage.append(vc.decryptMessage(message));
 			break;
 		}
 		
